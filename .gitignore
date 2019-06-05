@@ -1,0 +1,10 @@
+out/
+target/
+
+# Intelij IDEA
+.idea/
+*.iml
+
+# Derby
+derby.log
+test-db-address-book/
