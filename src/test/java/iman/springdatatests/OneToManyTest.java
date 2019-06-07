@@ -5,11 +5,13 @@ import iman.springdatatests.dao.ProductRepository;
 import iman.springdatatests.entity.Category;
 import iman.springdatatests.entity.Product;
 import iman.springdatatests.specification.CategorySpecification;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,13 +73,65 @@ public class OneToManyTest {
 
         List<Category> actualCats = categoryRepository.findAll(CategorySpecification.categoryIsLarge());
         String expectedPropertyName = "name";
-        String expectedPropertyValue = "Radio";
 
-        assertThat(actualCats, contains(hasProperty(expectedPropertyName, equalTo(expectedPropertyValue))));
+        assertThat(actualCats, contains( // Here oreder is important because of contains
+                hasProperty(expectedPropertyName, equalTo("TV")),
+                hasProperty(expectedPropertyName, equalTo("Radio")),
+                hasProperty(expectedPropertyName, equalTo("MP3"))
+                ));
 
 //        logger.info(actualCats.stream()
 //                .map(c->String.format("[%s (%s)]",c.getName(), c.getProducts().size()))
 //                .collect(Collectors.joining(" ")));
+
+    }
+
+    @Transactional(readOnly=true)
+    @Test
+    public void findAllLargeCategoryWithPaginationTest() {
+
+
+        Pageable firstPageWithOneElement = PageRequest.of(0, 1);
+
+        Page<Category> actualCats1 = categoryRepository.findAll(
+                CategorySpecification.categoryIsLarge(),
+                firstPageWithOneElement
+        );
+
+        String expectedPropertyName = "name";
+
+        assertThat(actualCats1, contains(
+                hasProperty(expectedPropertyName, equalTo("TV"))
+                ));
+
+        Page<Category> actualCats2 = categoryRepository.findAll(
+                CategorySpecification.categoryIsLarge(),
+                actualCats1.nextPageable()
+        );
+
+        assertThat(actualCats2, contains(
+                hasProperty(expectedPropertyName, equalTo("Radio"))
+        ));
+
+        Page<Category> actualCats3 = categoryRepository.findAll(
+                CategorySpecification.categoryIsLarge(),
+                actualCats2.nextPageable()
+        );
+
+        assertThat(actualCats3, contains(
+                hasProperty(expectedPropertyName, equalTo("MP3"))
+        ));
+
+        Page<Category> actualCats4 = categoryRepository.findAll(
+                CategorySpecification.categoryIsLarge(),
+                actualCats3.nextPageable()
+        );
+
+        //assertThat(actualCats4.getSize(), equalTo(0));
+
+        logger.info(actualCats4.stream()
+                .map(c->String.format("[%s (%s)]",c.getName(), c.getProducts().size()))
+                .collect(Collectors.joining(" ")));
 
     }
 
