@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>eleman</groupId>
+    <groupId>iman</groupId>
     <artifactId>spring-data-tests</artifactId>
     <version>1.0</version>
     <name>Spring Data Tests</name>
@@ -21,6 +21,8 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
     <dependencies>
@@ -44,6 +46,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>iman</groupId>
+            <artifactId>entities</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <dependency>

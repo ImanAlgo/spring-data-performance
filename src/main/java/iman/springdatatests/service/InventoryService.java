@@ -1,11 +1,11 @@
-package eleman.springdatatests.service;
+package iman.springdatatests.service;
 
 import java.util.List;
 import java.util.logging.Logger;
 
-import eleman.springdatatests.dao.ProductRepository;
-import eleman.springdatatests.entity.Category;
-import eleman.springdatatests.entity.Product;
+import iman.springdatatests.dao.ProductRepository;
+import iman.springdatatests.entity.Category;
+import iman.springdatatests.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

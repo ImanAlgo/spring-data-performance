@@ -1,4 +1,4 @@
-package eleman.springdatatests.entity;
+package iman.springdatatests.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -71,5 +71,14 @@ public class Product implements Serializable {
     @Override
     public int hashCode() {
         return 2018;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category.getName() +
+                '}';
     }
 }

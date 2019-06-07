@@ -1,11 +1,11 @@
-package eleman.springdatatests;
+package iman.springdatatests;
 
+import iman.springdatatests.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import eleman.springdatatests.service.InventoryService;
 
 @SpringBootApplication
 public class Main {
@@ -22,7 +22,7 @@ public class Main {
     public ApplicationRunner init() {
         return args -> {
 
-            inventoryService.fetchProductsAndCategories();
+//            inventoryService.fetchProductsAndCategories();
         };
     }
 }

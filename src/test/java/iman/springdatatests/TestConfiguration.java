@@ -1,4 +1,4 @@
-package eleman.springdatatests;
+package iman.springdatatests;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
